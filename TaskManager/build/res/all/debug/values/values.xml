@@ -9,6 +9,7 @@
     <string name="app_name">Task Manager</string>
     <string name="cancel">Cancel</string>
     <string name="discard">Discard</string>
+    <string name="no_tasks">No Tasks</string>
     <string name="tasks">Tasks</string>
     <string name="unsaved_changes_message">Would you like to add this task?</string>
     <string name="unsaved_changes_title">Unsaved Changes</string>
