@@ -8,7 +8,10 @@
     <string name="add_task">Add Task</string>
     <string name="app_name">Task Manager</string>
     <string name="cancel">Cancel</string>
+    <string name="discard">Discard</string>
     <string name="tasks">Tasks</string>
+    <string name="unsaved_changes_message">Would you like to add this task?</string>
+    <string name="unsaved_changes_title">Unsaved Changes</string>
 
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--

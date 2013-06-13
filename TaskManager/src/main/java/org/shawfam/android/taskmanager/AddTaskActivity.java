@@ -1,6 +1,10 @@
 package org.shawfam.android.taskmanager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +18,8 @@ public class AddTaskActivity extends TaskManagerActivity {
     private EditText taskNameEditText;
     private Button addButton;
     private Button cancelButton;
+    protected boolean changesPending;
+    private AlertDialog unsavedChangesDialog;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +35,32 @@ public class AddTaskActivity extends TaskManagerActivity {
     }
 
     protected void cancel() {
-        finish();
+        if (changesPending) {
+            unsavedChangesDialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.unsaved_changes_title)
+                    .setMessage(R.string.unsaved_changes_message)
+                    .setPositiveButton(R.string.add_task, new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            addTask();
+                        }
+                    })
+                    .setNeutralButton(R.string.discard, new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            unsavedChangesDialog.cancel();
+                        }
+                    })
+                    .create();
+            unsavedChangesDialog.show();
+
+        }
+        else {
+            finish();
+        }
     }
 
     private void setUpViews() {
@@ -47,6 +78,18 @@ public class AddTaskActivity extends TaskManagerActivity {
             public void onClick(View view) {
                 cancel();
             }
+        });
+        taskNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                changesPending = true;
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) { }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
         });
     }
 }

@@ -11,5 +11,11 @@
     </string>
     <string name="cancel" >Cancel
     </string>
+    <string name="unsaved_changes_title" >Unsaved Changes
+    </string>
+    <string name="unsaved_changes_message" >Would you like to add this task?
+    </string>
+    <string name="discard" >Discard
+    </string>
 
 </resources>
